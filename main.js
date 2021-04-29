@@ -11,3 +11,10 @@ window.setInterval(function() {
         segundos = 0;
     }
 },1000);
+
+function reseteo(){
+    window.alert("Reinicioamos tiempo y pasatiempo");
+
+    minutos = 0;
+    segundos = 0;
+}
