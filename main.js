@@ -14,8 +14,17 @@ window.setInterval(function () {
 
 function reseteo() {
   window.alert("Reiniciamos tiempo y pasatiempo");
+
+
+  var elements = document.querySelectorAll("input[type='text']");
+
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].value = "";
+    }
+
   //Le damos la iteración al primer elemento
   document.getElementById("1").focus();
+  
   minutos = 0;
   segundos = 0;
 }
@@ -68,6 +77,11 @@ async function getData() {
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("tablero").addEventListener("submit", validarPalabra);
 });
+
+
+
+
+
 
 //Creamos la palabra local
 var palabra;
