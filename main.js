@@ -19,7 +19,7 @@ function reseteo() {
   var elements = document.querySelectorAll("input[type='text']");
 
   for (var i = 0; i < elements.length; i++) {
-    elements[i].value = "";
+    elements[i].value = '';
   }
 
   //Le damos la iteración al primer elemento
@@ -194,6 +194,9 @@ function compruebaAceptaCookies() {
     cajacookies.style.display = '';
     window.alert("Cookies borradas!");
 
+    reseteo();
+  
+
   }
 
   function cargarCookies(){
@@ -202,17 +205,17 @@ function compruebaAceptaCookies() {
     var filasNuevas = localStorage.getItem('Filas');
     var element = 1;
 
-
-    for (let index = 0; index < filasNuevas.length; index++) {
-    
+    let index = 0;
+    while(index < filasNuevas.length){
+        console.log("Filas nuevas: "+filasNuevas[index]);
         if(filasNuevas[index] != ','){
-            
-            console.log("Filas nuevas: "+filasNuevas[index]);
+           // console.log("Filas nuevas: "+filasNuevas[index]);
             document.getElementById(element).value = filasNuevas[index];
             // document.getElementById(element.toString()).innerHTML = filasNuevas[index];
-
+            element++;
         }
-        element++;
+        index++;
+       
 
     }
     
