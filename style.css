@@ -145,9 +145,16 @@ footer{
 
 #cajacookies button {
   color: black;
+  float: right;
 }
 
+.ayuda{
+  cursor: pointer;
+}
 
+.Pista{
+  display: none;
+}
 
 
 

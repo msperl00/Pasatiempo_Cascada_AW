@@ -263,12 +263,23 @@
       <div id="botones">
         <button type="submit" id="submit" onclick="getData()">Comprobar</button>
         <input type="reset" value="Resetear" onclick="reseteo()" />
+
       </br>
-    </br>
-        <button id="cookies" onclick="eliminarCookies()">Borrar cookies</button>
+      </br>
+
         <button onclick="cargarCookies()">Cargar partida</button>
+        <button id="cookies" onclick="eliminarCookies()">Borrar Partida</button>
+
+        <div class="ayuda">  <p class="texto" onclick="ayuda()">Ayuda</p> 
+            <p id="Pista1"  class ="Pista">Pista 1: </p> <p id="Pista1" class ="Pista"></p>
+            <p id="Pista2" class ="Pista">Pista 2: </p>  <p id="Pista2" class ="Pista"> </p>
+            <p id="Pista3" class ="Pista">Pista 3:</p>  <p id="Pista3" class ="Pista"></p>
+        </div>
       </div>
     </div>
+
+   
+
     <div id="cajacookies">
       <p>Éste sitio web usa cookies, quieres permitir su uso?</p>
       <button onclick="aceptarCookies()" class="pull-right">
@@ -276,7 +287,7 @@
       </button>
     </div>
     <footer>
-      <label class="bottom-right">Tiempo: </label>
+      <label class="bottom-right">Tiempo:  </label>
       <div id="reloj" class="bottom-right"></div>
     </footer>
     <script src="main.js" async></script>
