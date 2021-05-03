@@ -3,6 +3,8 @@ var segundos = 0;
 var minutos = 0;
 var reloj = document.getElementById("reloj");
 
+var filas = new Array();
+
 window.setInterval(function () {
   reloj.innerHTML = minutos + " m " + segundos + " s";
   segundos++;
@@ -93,6 +95,15 @@ function validar() {
     console.log(className);
     validarPalabra(className);
   }
+
+  //Si acepta cookies -> Guardamos cada vez que comprobamos
+  if(localStorage.aceptaCookies == 'true'){
+
+        //Guardamos todas las filas
+       localStorage.setItem("Filas",filas);
+    
+   
+  }
 }
 
 function isPalabraDiccionario(palabra) {
@@ -125,6 +136,9 @@ function validarPalabra(className) {
   // Pasamos la palabra a minuscula
   palabra = palabra.toLowerCase();
 
+  //Añadimos la palabra al array de palabras.
+  filas.push(palabra);
+
   if (palabra != "") {
     //2. Validamos si las casillas estan vacias
     for (let index = 0; index < elements.length; index++) {
@@ -153,3 +167,62 @@ function validarPalabra(className) {
     console.log("Fila vacia");
   }
 }
+
+/* ésto comprueba la localStorage si ya tiene la variable guardada */
+function compruebaAceptaCookies() {
+    if(localStorage.aceptaCookies == 'true'){
+      cajacookies.style.display = 'none';
+    }
+  }
+  
+  /* aquí guardamos la variable de que se ha
+  aceptado el uso de cookies así no mostraremos
+  el mensaje de nuevo */
+  function aceptarCookies() {
+
+    //Tratamiento de visionado de la interfaz
+    localStorage.aceptaCookies = 'true';
+    cajacookies.style.display = 'none';
+    cookies.style.display = '';
+
+    
+    
+  }
+
+  function eliminarCookies(){
+    localStorage.aceptaCookies = 'false';
+    cajacookies.style.display = '';
+    window.alert("Cookies borradas!");
+
+  }
+
+  function cargarCookies(){
+
+    //Cargamos todas las filas
+    var filasNuevas = localStorage.getItem('Filas');
+    var element = 1;
+
+
+    for (let index = 0; index < filasNuevas.length; index++) {
+    
+        if(filasNuevas[index] != ','){
+            
+            console.log("Filas nuevas: "+filasNuevas[index]);
+            document.getElementById(element).value = filasNuevas[index];
+            // document.getElementById(element.toString()).innerHTML = filasNuevas[index];
+
+        }
+        element++;
+
+    }
+    
+  }
+  
+  /* ésto se ejecuta cuando la web está cargada */
+  $(document).ready(function () {
+   localStorage.aceptaCookies = 'false';
+    compruebaAceptaCookies();
+  });
+
+
+  
