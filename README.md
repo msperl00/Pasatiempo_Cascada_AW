@@ -1,5 +1,21 @@
 # Pasatiempo_Cascada_AW
-Prácticas 1 de cascada
+Prácticas 2 de cascada
+
+
+
+https://lavaldi.com/configurar-express-en-node/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 La base de ejecución de este programa funciona correctamente. Desde la parte de detalle de las palabras en el pasatiempo hasta su guarda con localStage.
