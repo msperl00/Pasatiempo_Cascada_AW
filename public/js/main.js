@@ -7,6 +7,7 @@ var filas = new Array();
 var contadorAyuda = 0;
 var contadorSolucion = 0;
 
+
 window.setInterval(function () {
   reloj.innerHTML = minutos + " m " + segundos + " s";
   segundos++;
@@ -55,25 +56,29 @@ var separador = "\n";
 
 const numeroFilas = 12;
 let soluciones = [
-  "clan",
-  "cian",
-  "nací",
-  "nace",
-  "cena",
-  "pena",
-  "remato",
-  "remoto",
-  "motero",
-  "lotero",
-  "tolero",
-  "torero",
 ];
 
 // Todas las funciones con un valor async, devuelve una promesa
 async function getData() {
-  // Fetch devuelve un objeto promise contieniendo la respuesta en un objeto Response.
-  // Un objeto response es una respuesta de tipo HTTP, no el propio texto.
-  // Cors sirve hacer solicitudes seguras
+ 
+  const userData = {
+    tipoJuego: 1
+  };
+  //PETICIÓN DE TIPO POST
+  axios.post("http://localhost:3000/api/soluciones",userData).then((response) => {
+
+   
+  soluciones = response.data;
+
+  validar();
+
+  }).catch((err) => {
+    console.log(err);
+  })
+  /*
+
+  
+
   fetch(url, {
     method: "GET",
     mode: "cors",
@@ -82,14 +87,17 @@ async function getData() {
     .then((data) => {
       arrayData = data.split(separador);
 
-      /*Salida por pantalla de la información
+      Salida por pantalla de la información
       for (var i = 0; i < arrayData.length; i++) {
         //console.log(arrayData[i]);
       }
-      */
+      
 
-      validar();
+
+     
     });
+
+    */
 }
 
 /*Añadimos un action listener para la validación de las palabras */
@@ -101,8 +109,13 @@ document.addEventListener("DOMContentLoaded", function () {
 var palabra;
 
 function validar() {
+  console.log("VACIO");
+  let espacioEnBlanco = false;
   //Iteramos todas las filas, para comprobar si estan o no vacias
-  for (let index = 1; index <= numeroFilas; index++) {
+  for (let index = 0; index <= numeroFilas; index++) {
+    if(index.toString == ""){
+      console.log("VACIO");
+    }
     let className = index.toString();
     validarPalabra(className);
   }
@@ -130,6 +143,24 @@ function isPalabraSolucion(palabra, className) {
 }
 
 function validarPalabra(className) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   var palabraDiccionario = true;
 
   //1. Recogemos las casillas
@@ -138,16 +169,24 @@ function validarPalabra(className) {
 
   // 1.1 Pasamos el HTMLCONTENT a String
   for (let index = 0; index < elements.length; index++) {
+
+    if (elements[index].value == "") {
+      palabraDiccionario = false;
+
+    }
     palabra += elements[index].value;
   }
 
   // Pasamos la palabra a minuscula
   palabra = palabra.toLowerCase();
 
-  //Añadimos la palabra al array de palabras.
-  filas.push(palabra);
+ 
 
   if (palabra != "") {
+
+     //Añadimos la palabra al array de palabras.
+  filas.push(palabra);
+
     //2. Validamos si las casillas estan vacias
     for (let index = 0; index < elements.length; index++) {
       //console.log(elements[index].value);
@@ -158,7 +197,7 @@ function validarPalabra(className) {
     }
 
     //console.log(palabra);
-    if (palabraDiccionario && isPalabraDiccionario(palabra)) {
+    if (palabraDiccionario && ispalabraVacia(palabra)) {
       window.alert(
         "Palabra de la fila " + className + " dentro del diccionario"
       );
@@ -179,6 +218,21 @@ function validarPalabra(className) {
     //console.log("Fila vacia");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ésto comprueba la localStorage si ya tiene la variable guardada */
 function compruebaAceptaCookies() {

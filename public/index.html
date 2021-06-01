@@ -15,7 +15,17 @@
   </head>
 
   <body>
-    <header>Pasatiempo en cascada</header>
+    <header>
+      Pasatiempo en cascada
+      <ul>
+       
+      <li><a href="/">Home</a></li>
+      <li><a href="/juego/1">Juego 1</a></li>
+      <li><a href="juego/2">Juego 2</a></li>
+      <li><a href="juego/3">Juego 3</a></li>
+      </ul>
+
+    </header>
 
     <form id="tablero" class="Izq">
       <div id="Fila_1" class="Fila">
@@ -290,6 +300,7 @@
       <label class="bottom-right">Tiempo:  </label>
       <div id="reloj" class="bottom-right"></div>
     </footer>
-    <script src="./main.js" async></script>
+    <script src="./js/main.js" async></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
