@@ -64,9 +64,10 @@ async function getData() {
 
   //PETICIÓN DE TIPO POST
   axios
-    .post("http://localhost:3000/api/soluciones", userData)
+    .post("http://localhost:3000/api/juego0", userData)
     .then((response) => {
       soluciones = response.data;
+      console.log(response.data);
       validar();
     })
     .catch((err) => {
@@ -83,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function validar() {
   let espacioEnBlanco = false;
+
+ 
 
   // RECORREMOS LAS FILAS
   for (let index = 1; index <= numeroFilas; index++) {

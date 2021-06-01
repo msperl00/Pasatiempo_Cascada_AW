@@ -1,24 +1,7 @@
 # Pasatiempo_Cascada_AW
 Prácticas 2 de cascada
 
-
-
-https://lavaldi.com/configurar-express-en-node/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-La base de ejecución de este programa funciona correctamente. Desde la parte de detalle de las palabras en el pasatiempo hasta su guarda con localStage.
+La base de ejecución de este programa funciona correctamente. Desde la parte de detalle de las palabras en el pasatiempo hasta su guarda con localStage. Pasando por el estado del backend donde se encuentran las soluciones
 
 - El tiempo se inicia con la apertura de la página y se reinicia con las nuevas cargas de páginas, y nuevos juegos, además del boton reseteo.
 
@@ -30,6 +13,5 @@ La base de ejecución de este programa funciona correctamente. Desde la parte de
 
 - Solo se podra pedir ayuda, después de haber comporbado como minimo una palabra.
 
--La ayuda ha quedado sin desarrollar por completo por el no conocimiento de su desarrollo.
 
 -Los console.log() dentro del código, son valores que han ayudado al desarrollo de la práctica.

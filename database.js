@@ -21,7 +21,7 @@ connection.connect(function (err, conn) {
 
 connection.query('SELECT * FROM pasatiempo.soluciones;', function(err, rows, fields) {
     if (err) throw err;
-   // console.log('The solution is: ', rows);
+    //console.log('The solution is: ', rows);
   });
 
 //connection.end();
