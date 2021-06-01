@@ -7,7 +7,6 @@ var filas = new Array();
 var contadorAyuda = 0;
 var contadorSolucion = 0;
 
-
 window.setInterval(function () {
   reloj.innerHTML = minutos + " m " + segundos + " s";
   segundos++;
@@ -55,184 +54,97 @@ let arrayData = new Array();
 var separador = "\n";
 
 const numeroFilas = 12;
-let soluciones = [
-];
+let soluciones = [];
 
 // Todas las funciones con un valor async, devuelve una promesa
 async function getData() {
- 
   const userData = {
-    tipoJuego: 1
+    tipoJuego: 0,
   };
+
   //PETICIÓN DE TIPO POST
-  axios.post("http://localhost:3000/api/soluciones",userData).then((response) => {
-
-   
-  soluciones = response.data;
-
-  validar();
-
-  }).catch((err) => {
-    console.log(err);
-  })
-  /*
-
-  
-
-  fetch(url, {
-    method: "GET",
-    mode: "cors",
-  })
-    .then((response) => response.text())
-    .then((data) => {
-      arrayData = data.split(separador);
-
-      Salida por pantalla de la información
-      for (var i = 0; i < arrayData.length; i++) {
-        //console.log(arrayData[i]);
-      }
-      
-
-
-     
+  axios
+    .post("http://localhost:3000/api/soluciones", userData)
+    .then((response) => {
+      soluciones = response.data;
+      validar();
+    })
+    .catch((err) => {
+      console.log(err);
     });
-
-    */
 }
 
 /*Añadimos un action listener para la validación de las palabras */
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("tablero").addEventListener("submit", validarPalabra);
+  document
+    .getElementById("tablero")
+    .addEventListener("submit", validarPalabras);
 });
 
-//Creamos la palabra local
-var palabra;
-
 function validar() {
-  console.log("VACIO");
   let espacioEnBlanco = false;
-  //Iteramos todas las filas, para comprobar si estan o no vacias
-  for (let index = 0; index <= numeroFilas; index++) {
-    if(index.toString == ""){
-      console.log("VACIO");
+
+  // RECORREMOS LAS FILAS
+  for (let index = 1; index <= numeroFilas; index++) {
+    let elements = document.getElementsByClassName(index);
+    let palabra = "";
+    //RECORREMOS LA PALABRA
+    for (let j = 0; j < elements.length; j++) {
+      if (elements[j].value != "") {
+        palabra += elements[j].value;
+      } else {
+        console.log("Encontrado espacio");
+        espacioEnBlanco = true;
+      }
     }
-    let className = index.toString();
-    validarPalabra(className);
+    // AÑADIMOS LA PALABRA AL ARRAY
+    if (!espacioEnBlanco) {
+      palabra = palabra.toLowerCase();
+      filas.push(palabra);
+      console.log("Palabra: " + palabra);
+    } else {
+      console.log("Saliendo");
+      break;
+    }
   }
+
+  validarPalabras();
 
   //Si acepta cookies -> Guardamos cada vez que comprobamos
   if (localStorage.aceptaCookies == "true") {
     //Guardamos todas las filas
-    localStorage.setItem("Filas", filas);
+    console.log("Cokkies aceptadas")
+    localStorage.setItem("Filas", JSON.stringify(filas));
+    
+
   }
 }
 
-function isPalabraDiccionario(palabra) {
-  for (let index = 0; index < arrayData.length; index++) {
-    if (arrayData[index] == palabra) return true;
-  }
-  return false;
-}
 
-function isPalabraSolucion(palabra, className) {
-  let index = parseInt(className, 10);
-  // -1 PORQUE LA CLASE EMPIEZA EN 0
-  if (soluciones[index - 1] == palabra) return true;
+function validarPalabras() {
+  console.log("En validar palabras con: " + filas.length);
 
-  return false;
-}
+  if (filas.length == 0) {
+    window.alert("No existe ninguna referencia todavia");
+  } else {
+    let win = true;
+    for (let i = 0; i < filas.length; i++) {
+      if (soluciones[i].palabra === filas[i]) {
+        window.alert("Palabra de la fila " + i + " CORRECTA!!!");
 
-function validarPalabra(className) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  var palabraDiccionario = true;
-
-  //1. Recogemos las casillas
-  var elements = document.getElementsByClassName(className);
-  let palabra = "";
-
-  // 1.1 Pasamos el HTMLCONTENT a String
-  for (let index = 0; index < elements.length; index++) {
-
-    if (elements[index].value == "") {
-      palabraDiccionario = false;
-
-    }
-    palabra += elements[index].value;
-  }
-
-  // Pasamos la palabra a minuscula
-  palabra = palabra.toLowerCase();
-
- 
-
-  if (palabra != "") {
-
-     //Añadimos la palabra al array de palabras.
-  filas.push(palabra);
-
-    //2. Validamos si las casillas estan vacias
-    for (let index = 0; index < elements.length; index++) {
-      //console.log(elements[index].value);
-      //Vemos si existen casillas vacias
-      if (elements[index].value == "") {
-        palabraDiccionario = false;
+        if (i == 11) {
+          window.alert("ENHORABUENA!!!");
+        }
+      } else {
+        win = false;
+        window.alert("Palabra de la fila " + i + " incorrecta");
+        // VACIO EL ARRAY
+        filas.length = 0;
       }
     }
-
-    //console.log(palabra);
-    if (palabraDiccionario && ispalabraVacia(palabra)) {
-      window.alert(
-        "Palabra de la fila " + className + " dentro del diccionario"
-      );
-      if (isPalabraSolucion(palabra, className)) {
-        window.alert("Palabra de la fila " + className + " es solución");
-        contadorSolucion++;
-        if (contadorSolucion == 12) {
-          window.alert("Pasapalabra resuelto");
-        }
-      } else
-        window.alert(
-          "Palabra de la fila " +
-            className +
-            " es solución pero no es la fila correcta"
-        );
-    } else window.alert("Palabra que NO esta dentro del diccionario");
-  } else {
-    //console.log("Fila vacia");
   }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ésto comprueba la localStorage si ya tiene la variable guardada */
 function compruebaAceptaCookies() {
@@ -252,6 +164,7 @@ function aceptarCookies() {
 }
 
 function eliminarCookies() {
+  
   localStorage.aceptaCookies = "false";
   cajacookies.style.display = "";
   window.alert("Cookies borradas!");
@@ -263,19 +176,20 @@ function eliminarCookies() {
 
 function cargarCookies() {
   //Cargamos todas las filas
+  console.log("En cargando cookeis");
   var filasNuevas = localStorage.getItem("Filas");
-  var element = 1;
+  console.log(filasNuevas);
+  filasNuevas = JSON.parse(filasNuevas);
 
-  let index = 0;
-  while (index < filasNuevas.length) {
-    //console.log("Filas nuevas: " + filasNuevas[index]);
-    if (filasNuevas[index] != ",") {
-      // console.log("Filas nuevas: "+filasNuevas[index]);
-      document.getElementById(element).value = filasNuevas[index];
-      // document.getElementById(element.toString()).innerHTML = filasNuevas[index];
+  var element = 1;
+  
+  // Numero de palabras que tengo que añadir
+  for (var i = 0; i < filasNuevas.length; i++){
+    
+    for (var j = 0; j < filasNuevas[i].length;j++){
+      document.getElementById(element).value = filasNuevas[i][j];
       element++;
     }
-    index++;
   }
 }
 
@@ -318,5 +232,3 @@ $(document).ready(function () {
   localStorage.aceptaCookies = "false";
   compruebaAceptaCookies();
 });
-
-
