@@ -185,3 +185,22 @@ a:hover, a:focus {
 a:link, a:visited, a:active {
   text-decoration:none;
 }
+#lista1 {
+  font-family:Arial;
+  font-weight:bold;
+  font-size:33px;
+  margin-left: 300px;
+  align-items: center;
+}
+
+#lista1 li {
+   display:inline-block;
+   padding-left:3px;
+   padding-right:3px;
+   align-items: center;
+}
+a {
+  color:white;
+  text-decoration:none;
+}
+

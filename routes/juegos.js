@@ -26,7 +26,7 @@ router.post("/api/juego0", (req, res) => {
   }
 });
 
-router.post("/api/juego2", (req, res) => {
+router.post("/api/juego1", (req, res) => {
 
 
 
@@ -35,7 +35,7 @@ router.post("/api/juego2", (req, res) => {
           "SELECT * FROM pasatiempo.soluciones WHERE pasatiempo.soluciones.id_juego = 1",
           (err, rows, fields) => {
             if (!err) {
-              console.log("SIN ERROR");
+            //  console.log("SIN ERROR");
               res.json(rows);
             } else {
               console.log(err);

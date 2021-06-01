@@ -36,6 +36,16 @@ app.post('/views/pasatiempo.html', (req, res) => {
   res.render(path.join(__dirname +'/views/pasatiempo.html'));
 
 });
+app.post('/views/pasatiempo-1.html', (req, res) => {
+
+  res.render(path.join(__dirname +'/views/pasatiempo-1.html'));
+
+});
+app.post('/views/pasatiempo-2.html', (req, res) => {
+
+  res.render(path.join(__dirname +'/views/pasatiempo-2.html'));
+
+});
 
 
 

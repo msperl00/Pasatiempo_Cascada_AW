@@ -19,17 +19,59 @@
       Pasatiempo en cascada
     </header>
 
-
-    <form method="post" action="/views/pasatiempo.html" class="form">
-
-      <div id="wrapper">
+    <h1 align="center">Elige uno de los pasatiempos</h2>
+    
+    <ul id="lista1">
      
-        <a  href="#" onclick="$(this).closest('form').submit()">
-          Pasatiempo 1
-         </a>
-     
-      </div>
-    </form>
+      <li>
+        
+        <form method ="post" action="/views/pasatiempo.html" class="form">
+
+          <div id="wrapper">
+         
+            <a  href="#" onclick="$(this).closest('form').submit()">
+              Pasatiempo 1
+             </a>
+         
+          </div>
+        </form>
+      </li>
+      <li>
+        <form method ="post" action="/views/pasatiempo-1.html" class="form">
+
+          <div id="wrapper">
+         
+            <a  href="#" onclick="$(this).closest('form').submit()">
+              Pasatiempo 2
+             </a>
+         
+          </div>
+        </form>
+      </li>
+      <li>
+        <form method ="post" action="/views/pasatiempo-2.html" class="form">
+
+          <div id="wrapper">
+         
+            <a  href="#" onclick="$(this).closest('form').submit()">
+              Pasatiempo 3
+             </a>
+         
+          </div>
+        </form>
+      </li>
+      <li>
+       
+      </li>
+      <li>
+       
+      </li>
+  </ul>
+
+
+    
+   
+    
    
   </body>
 </html>
